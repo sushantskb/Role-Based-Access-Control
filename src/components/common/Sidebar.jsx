@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -23,31 +24,31 @@ const Sidebar = () => {
         <nav className="flex-grow">
           <ul className="space-y-4 p-4">
             <li>
-              <a
-                href="#"
+              <Link
+                to="/users"
                 className="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded-md"
               >
                 <span className="text-lg">👥</span>
                 {isOpen && <span>User Management</span>}
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/roles"
                 className="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded-md"
               >
                 <span className="text-lg">⚙️</span>
                 {isOpen && <span>Role Management</span>}
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/permission"
                 className="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded-md"
               >
                 <span className="text-lg">🔒</span>
                 {isOpen && <span>Permissions</span>}
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

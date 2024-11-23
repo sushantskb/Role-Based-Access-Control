@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
-
-// Mock data for roles and permissions
-const initialPermissions = ["Read", "Write", "Delete", "Execute", "Manage Users"];
-const initialRoles = [
-  { id: 1, name: "Admin", permissions: ["Read", "Write", "Delete", "Manage Users"] },
-  { id: 2, name: "Editor", permissions: ["Read", "Write"] },
-  { id: 3, name: "Viewer", permissions: ["Read"] },
-];
+import { initialPermissions, initialRoles1 } from "../assets/data/sampleData";
 
 const Permission = () => {
-  const [roles, setRoles] = useState(initialRoles);
+  const [roles, setRoles] = useState(initialRoles1);
   const [permissions] = useState(initialPermissions);
   const [selectedRoleId, setSelectedRoleId] = useState(null);
 

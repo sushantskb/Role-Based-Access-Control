@@ -29,3 +29,11 @@ export const initialRoles = [
   { id: 2, name: "Editor", permissions: ["Read", "Write"] },
   { id: 3, name: "Viewer", permissions: ["Read"] },
 ];
+
+ // Mock data for roles and permissions
+ export const initialPermissions = ["Read", "Write", "Delete", "Execute", "Manage Users"];
+export const initialRoles1 = [
+  { id: 1, name: "Admin", permissions: ["Read", "Write", "Delete", "Manage Users"] },
+  { id: 2, name: "Editor", permissions: ["Read", "Write"] },
+  { id: 3, name: "Viewer", permissions: ["Read"] },
+];
