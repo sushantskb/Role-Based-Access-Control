@@ -41,7 +41,7 @@ Ensure you have the following installed:
 
 2. Navigate into the project directory:
     ```bash 
-    cd rbac-system
+    cd Role-Based-Access-Control
 
 3. Install the necessary dependencies using npm (or yarn):
     ```bash 
