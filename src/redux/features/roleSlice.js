@@ -6,7 +6,7 @@ const initalRoles = [
   {
     id: 1,
     name: "Admin",
-    permission: ["Read", "Write", "Delete", "Manage"],
+    permissions: ["Read", "Write", "Delete", "Manage"], 
   },
   {
     id: 2,
@@ -32,13 +32,13 @@ const roleSlice = createSlice({
     },
     togglePermission: (state, action) => {
       const { roleId, permission } = action.payload;
-      const role = state.role.find((role) => role.id === roleId);
+      const role = state.roles.find((role) => role.id === roleId); // Fixed `state.roles`
       if (role) {
-        const hasPermission = role.permission.includes(permission);
+        const hasPermission = role.permissions.includes(permission); // Fixed `role.permissions`
         if (hasPermission) {
-          role.permission = role.permissions.filter(
+          role.permissions = role.permissions.filter(
             (perm) => perm !== permission
-          );
+          ); // Fixed `role.permissions`
         } else {
           role.permissions.push(permission);
         }
