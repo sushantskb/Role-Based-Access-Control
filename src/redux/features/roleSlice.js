@@ -32,14 +32,14 @@ const roleSlice = createSlice({
     },
     togglePermission: (state, action) => {
       const { roleId, permission } = action.payload;
-      const role = state.roles.find((role) => role.id === roleId); // Fixed `state.roles`
+      const role = state.roles.find((role) => role.id === roleId);
       if (role) {
-        const hasPermission = role.permissions.includes(permission); // Fixed `role.permissions`
+        const hasPermission = role.permissions.includes(permission);
         if (hasPermission) {
-          role.permissions = role.permissions.filter(
-            (perm) => perm !== permission
-          ); // Fixed `role.permissions`
+          // Remove the permission
+          role.permissions = role.permissions.filter((perm) => perm !== permission);
         } else {
+          // Add the permission
           role.permissions.push(permission);
         }
       }

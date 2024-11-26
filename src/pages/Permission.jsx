@@ -1,42 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { initialPermissions, initialRoles1 } from "../assets/data/sampleData";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { togglePermission } from "../redux/features/roleSlice";
 
 const Permission = () => {
-  const [roles, setRoles] = useState(initialRoles1);
-  const [permissions] = useState(initialPermissions);
+  const roles = useSelector((state) => state.roles.roles || []);
+  const permissions = useSelector((state) => state.roles.permissions || []);
+  const dispatch = useDispatch();
+
   const [selectedRoleId, setSelectedRoleId] = useState(null);
 
-  // Handle selecting a role to manage permissions
   const handleRoleSelect = (roleId) => {
     setSelectedRoleId(roleId);
   };
 
   const selectedRole = roles.find((role) => role.id === selectedRoleId);
 
-  // Handle toggling a permission for a role
-  const togglePermission = (permission) => {
-    setRoles((prevRoles) => {
-      return prevRoles.map((role) => {
-        if (role.id === selectedRoleId) {
-          // Check if permission exists in the role's permission array
-          const hasPermission = role.permissions.includes(permission);
-          const updatedPermissions = hasPermission
-            ? role.permissions.filter((perm) => perm !== permission) // Remove permission
-            : [...role.permissions, permission]; // Add permission
-
-          return { ...role, permissions: updatedPermissions };
-        }
-        return role;
-      });
-    });
-  };
-
-  useEffect(() => {
-    // Reset the selected role when the role list changes (to prevent stale data issues)
-    if (selectedRoleId !== null && !roles.find((role) => role.id === selectedRoleId)) {
-      setSelectedRoleId(null);
+  const handleTogglePermission = (permission) => {
+    if (selectedRoleId) {
+      dispatch(
+        togglePermission({
+          roleId: selectedRoleId,
+          permission,
+        })
+      );
     }
-  }, [roles, selectedRoleId]);
+  };
 
   return (
     <div className="p-6">
@@ -67,8 +55,8 @@ const Permission = () => {
               <label key={permission} className="label cursor-pointer flex items-center space-x-3">
                 <input
                   type="checkbox"
-                  checked={selectedRole.permissions.includes(permission)} // Track permission availability
-                  onChange={() => togglePermission(permission)} // Toggle permission
+                  checked={selectedRole.permissions.includes(permission)}
+                  onChange={() => handleTogglePermission(permission)}
                   className="checkbox checkbox-primary"
                 />
                 <span className="label-text">{permission}</span>
@@ -78,7 +66,7 @@ const Permission = () => {
         </div>
       )}
 
-      {/* Display current permissions for the selected role */}
+      {/* Display Current Permissions */}
       {selectedRole && (
         <div className="mt-4">
           <h4 className="text-lg font-semibold">Current Permissions</h4>
